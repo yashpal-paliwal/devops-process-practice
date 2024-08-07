@@ -21,6 +21,8 @@ jobs:
     - name: Install dependencies
       run: |
         pip install pyinstaller
+        pip install pillow
+        pip install img2pdf
 
     - name: Build EXE
       run: |
