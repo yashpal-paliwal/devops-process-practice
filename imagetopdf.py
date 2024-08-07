@@ -3,7 +3,6 @@ from tkinter import filedialog, messagebox
 from PIL import Image
 import img2pdf
 import os
-
 class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
@@ -57,16 +56,12 @@ class Application(tk.Frame):
                 file.write(pdf_bytes)
             image.close()
             messagebox.showinfo("Success", "Image converted to PDF successfully!")
-
 root = tk.Tk()
 root.title('Image to PDF')
-
 # Set the size of the window
 window_width = 720
 window_height = 100
-
 root.geometry(f'{window_width}x{window_height}')
 root.resizable(0, 0)  # This will disable the maximize button
-
 app = Application(master=root)
 app.mainloop()
