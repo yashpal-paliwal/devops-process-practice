@@ -65,3 +65,4 @@ root.geometry(f'{window_width}x{window_height}')
 root.resizable(0, 0)  # This will disable the maximize button
 app = Application(master=root)
 app.mainloop()
+
