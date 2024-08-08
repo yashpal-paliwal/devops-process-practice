@@ -1,4 +1,3 @@
 pyinstaller
 pyinstaller-hooks-contrib
 img2pdf
-pytest
