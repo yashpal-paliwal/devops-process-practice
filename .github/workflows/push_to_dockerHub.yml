@@ -1,4 +1,4 @@
-name: Deploy to Docker Hub - Python CI/CD
+name: Deploy to Docker Hub - Python App CI/CD
 
 on:
   push:
