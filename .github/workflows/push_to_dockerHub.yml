@@ -4,6 +4,9 @@ on:
   push:
     branches: [ master ]
 
+env:
+  VERSION: 0.0.1
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,11 +24,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pytest
-
     - name: Run Tests
       run: |
         pytest test_main.py
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -43,9 +44,12 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+    - name: Increment version
+      run: echo "VERSION=$(echo $(($(echo $VERSION | cut -d. -f3)+1)))" >> $GITHUB_ENV
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
         context: .
         push: true
-        tags: yashpalpaliwal374/test_github:0.0.1.TEST
+        tags: yashpalpaliwal374/test_github:${{ env.VERSION }}.TEST
