@@ -4,9 +4,6 @@ on:
   push:
     branches: [ master ]
 
-env:
-  VERSION: 0.0.1
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -44,13 +41,23 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+    - name: Read version
+      id: version
+      run: echo "::set-output name=version::$(cat version.txt)"
+
     - name: Increment version
-      run: echo "VERSION=$(echo $(($(echo $VERSION | cut -d. -f3)+1)))" >> $GITHUB_ENV
+      run: echo $(($(echo ${{ steps.version.outputs.version }} | cut -d. -f3)+1)) > version.txt
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
         context: .
         push: true
-        tags: yashpalpaliwal374/test_github:${{ env.VERSION }}.TEST
+        tags: yashpalpaliwal374/test_github:${{ steps.version.outputs.version }}.TEST
 
+    - name: Commit and push version number
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Increment version number" -a
+        git push
