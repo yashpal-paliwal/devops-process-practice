@@ -53,3 +53,4 @@ jobs:
         context: .
         push: true
         tags: yashpalpaliwal374/test_github:${{ env.VERSION }}.TEST
+
