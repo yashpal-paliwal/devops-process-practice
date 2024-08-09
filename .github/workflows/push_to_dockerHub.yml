@@ -57,7 +57,9 @@ jobs:
 
     - name: Commit and push version number
       run: |
-        git config --local user.email "yashpal.paliwal@ap.jll.com"
-        git config --local user.name "yashpal-paliwal"
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git commit -m "Increment version number" -a
-        git push
+        git push origin HEAD:master
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT }}
