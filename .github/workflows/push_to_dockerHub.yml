@@ -50,5 +50,5 @@ jobs:
     - name: Build and push Docker image
       run: |
         timestamp=$(date +%Y%m%d%H%M%S)
-        docker build -t yashpalpaliwal374/test_github:$timestamp .
-        docker push yashpalpaliwal374/test_github:$timestamp
+        docker build -t yashpalpaliwal374/test_github:0.0.$timestamp.TEST .
+        docker push yashpalpaliwal374/test_github:0.0.$timestamp.TEST
