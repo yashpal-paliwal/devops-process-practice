@@ -41,9 +41,14 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+    # - name: Build and push Docker image
+    #   uses: docker/build-push-action@v2
+    #   with:
+    #     context: .
+    #     push: true
+    #     tags: yashpalpaliwal374/test_github:0.0.${{ github.run_number }}.TEST
     - name: Build and push Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        push: true
-        tags: yashpalpaliwal374/test_github:0.0.${{ github.run_number }}.TEST
+      run: |
+        timestamp=$(date +%Y%m%d%H%M%S)
+        docker build -t yashpalpaliwal374/test_github:$timestamp .
+        docker push yashpalpaliwal374/test_github:$timestamp
