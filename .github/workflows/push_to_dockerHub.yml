@@ -60,6 +60,5 @@ jobs:
         git config --local user.email "yashpal.paliwal@ap.jll.com"
         git config --local user.name "yashpal-paliwal"
         git commit -m "Increment version number" -a
-        git push origin HEAD:master
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT }}
+        git push https://${{ secrets.PAT }}@github.com/yashpal-paliwal/devops-process-practice.git HEAD:master
+
